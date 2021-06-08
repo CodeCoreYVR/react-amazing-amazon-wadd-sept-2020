@@ -8,19 +8,34 @@ class ProductShowPage extends Component  {
     this.state = {
       product
     };
+    this.deleteReview = this.deleteReview.bind(this);
+
   }
 
 
+  deleteReview(reviewId) {
+    return () => {
+      const { product } = this.state;
+      const { reviews } = product;
+
+      this.setState({
+        product: {
+          ...product,
+          reviews: reviews.filter(review => review.id !== reviewId)
+        }
+      });
+    };
+  }
 
   render(){
     const { product } = this.state;
     const { reviews = [] } = product;
-  // const { title, description, created_at, seller, price, reviews } = product;
   return (
     <main>
              <ProductDetails {...product} />
+             <h3>Reviews</h3>
 
-             <ReviewList reviews={reviews} />
+             <ReviewList reviews={reviews} onReviewDeleteClick={this.deleteReview} />
 
     </main>
   )

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReviewDetails from './ReviewDetails'
 
-const ReviewList = ({reviews})=> {
+const ReviewList = (props = {})=> {
+  const { reviews, onReviewDeleteClick = () => {} } = props;
+
   return (
     <div>
       {reviews?reviews.map((review,i) => {
@@ -12,6 +14,7 @@ const ReviewList = ({reviews})=> {
             body={review.body}
             reviewerName={review.reviewer?review.reviewer.full_name:''}
             createdAt={review.created_at}
+            onDeleteClick={onReviewDeleteClick}
           />
         
       }):''}
