@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import products from '../data/productsIndexData'
+import products from '../data/products'
 class ProductsIndexPage extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      products
+    };
+  }
   render() {
+    const { products } = this.state;
+
     return (
       <main>
         {products.map(p => {

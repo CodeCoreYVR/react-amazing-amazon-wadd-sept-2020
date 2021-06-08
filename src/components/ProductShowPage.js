@@ -3,25 +3,25 @@ import ProductDetails  from './ProductDetails'
 import ReviewList  from './ReviewList'
 import product from '../data/product'
 class ProductShowPage extends Component  {
-  constructor(props){
-super(props)
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      product
+    };
   }
 
 
+
   render(){
-  const { title, description, created_at, seller, price, reviews } = product;
+    const { product } = this.state;
+    const { reviews = [] } = product;
+  // const { title, description, created_at, seller, price, reviews } = product;
   return (
     <main>
-      <ProductDetails
-        title={title}
-        description={description}
-        fullName={seller?seller.full_name:''}
-        price={price}
-        created_at={new Date(created_at)}
-      />
-      <ReviewList 
-      reviews={reviews} />
+             <ProductDetails {...product} />
+
+             <ReviewList reviews={reviews} />
+
     </main>
   )
 }}
