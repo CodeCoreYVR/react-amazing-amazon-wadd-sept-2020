@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import products from '../data/products'
+import ProductForm from "./ProductForm";
 class ProductsIndexPage extends Component {
   constructor(props) {
     super(props);
@@ -7,9 +8,26 @@ class ProductsIndexPage extends Component {
       products
     };
     this.deleteProduct = this.deleteProduct.bind(this);
-
+    this.addProduct = this.addProduct.bind(this);
+    this.maxProductId = this.maxProductId.bind(this);
   }
 
+  maxProductId() {
+    const { products } = this.state;
+    return Math.max.apply(Math, products.map(product => product.id)) || 0;
+  }
+
+  addProduct(newProduct) {
+    const { products } = this.state;
+    newProduct.id = this.maxProductId() + 1;
+    newProduct.user = {
+      first_name: 'test',
+      last_name: 'user'
+    };
+    this.setState({
+      products: [newProduct].concat(products)
+    });
+  }
   deleteProduct(productId) {
     return () => {
       const { products } = this.state;
@@ -23,6 +41,8 @@ class ProductsIndexPage extends Component {
 
     return (
       <main>
+                <ProductForm onSubmit={this.addProduct} />
+
         {products.map(p => {
           return (
             <>
