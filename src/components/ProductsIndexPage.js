@@ -6,6 +6,17 @@ class ProductsIndexPage extends Component {
     this.state = {
       products
     };
+    this.deleteProduct = this.deleteProduct.bind(this);
+
+  }
+
+  deleteProduct(productId) {
+    return () => {
+      const { products } = this.state;
+      this.setState({
+        products: products.filter(product => product.id !== productId)
+      });
+    };
   }
   render() {
     const { products } = this.state;
@@ -19,6 +30,8 @@ class ProductsIndexPage extends Component {
               <h1>
                 {p.id} - {p.title}
               </h1>
+              <button onClick={this.deleteProduct(p.id)}>Delete</button>
+
             </div>
             </>
           );
