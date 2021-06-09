@@ -6,7 +6,7 @@ function ReviewDetails(props = {}) {
       <h3 className='header'>
         <StarRating max={5} currentNumber={props.rating} />
       </h3>
-      <p>body: {props.body}</p>
+      <p>{props.body}</p>
       <p>Reviewed by: {props.reviewerName}</p>
       <p>createdAt: {props.createdAt}</p>{' '}
       <button onClick={onDeleteClick(props.id)}>Delete</button>

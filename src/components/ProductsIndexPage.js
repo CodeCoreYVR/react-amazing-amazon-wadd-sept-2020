@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import products from '../data/products'
 import ProductForm from "./ProductForm";
+import { Link } from 'react-router-dom';
+
 class ProductsIndexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
+
       products
     };
     this.deleteProduct = this.deleteProduct.bind(this);
@@ -48,7 +52,7 @@ class ProductsIndexPage extends Component {
             <>
             <div key={p.id}>
               <h1>
-                {p.id} - {p.title}
+                <Link to={`/products/${p.id}`}>{p.title}</Link>{' '}
               </h1>
               <button onClick={this.deleteProduct(p.id)}>Delete</button>
 
