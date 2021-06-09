@@ -1,19 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 function NavBar(props) {
   return (
     <nav
       style={{
-        padding: '10px',
-        display: 'flex'
-      }}>
-      <Link style={{ marginRight: '20px' }} to="/">
+        padding: "10px",
+        display: "flex",
+      }}
+    >
+      <NavLink style={{ marginRight: "20px" }} to="/">
         Home
-      </Link>
-      <Link to="/products">Products</Link>
+      </NavLink>
+      <NavLink style={{ marginRight: "20px" }} to="/products">
+        Products
+      </NavLink>
+      <NavLink style={{ marginRight: "20px" }} to="/products/new">
+        New Product
+      </NavLink>
     </nav>
   );
 }
 
-export default NavBar ;
+export default NavBar;

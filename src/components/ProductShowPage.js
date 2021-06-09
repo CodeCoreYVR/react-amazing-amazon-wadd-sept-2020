@@ -6,20 +6,19 @@ import ReviewList  from './ReviewList'
 class ProductShowPage extends Component  {
   constructor(props){
 super(props)
-this.state={product:{}}
-this.deleteReview=this.deleteReview.bind(this)
+this.state = {
+  loading: true,
+  product: {}
+};
+this.deleteReview = this.deleteReview.bind(this);
   }
 
 
-  componentDidMount(){
-    Product.show(this.props.match.params.id)
-    .then(product=>{
-      this.setState((state)=>{
-        return{
-          product: product
-        }
-      })
-    })
+
+  async componentDidMount() {
+    const { params } = this.props.match;
+    const product = await Product.show(params.id);
+    this.setState({ product, loading: false });
   }
   deleteReview(id){
     this.setState((state)=>{
@@ -29,15 +28,20 @@ this.deleteReview=this.deleteReview.bind(this)
     })
   }
   render(){
-  const { title, description, created_at, seller, price, reviews } = this.state.product;
+    const { product, loading } = this.state;
+    if (loading) {
+      return (
+        <main style={{ padding: '0  20px' }}>
+          <h3>Loading product...</h3>
+        </main>
+      );
+    }
+    const { reviews = [] } = product;
+
   return (
     <main>
       <ProductDetails
-        title={title}
-        description={description}
-        fullName={seller?seller.full_name:''}
-        price={price}
-        created_at={new Date(created_at)}
+ {...product}
       />
       <ReviewList 
       reviews={reviews}
