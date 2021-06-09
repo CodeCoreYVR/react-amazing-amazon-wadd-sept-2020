@@ -1,42 +1,47 @@
 import React, { Component } from 'react'
 import ProductDetails  from './ProductDetails'
+import {Product} from '../requests'
 import ReviewList  from './ReviewList'
-import product from '../data/product'
+
 class ProductShowPage extends Component  {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product
-    };
-    this.deleteReview = this.deleteReview.bind(this);
-
+  constructor(props){
+super(props)
+this.state={product:{}}
+this.deleteReview=this.deleteReview.bind(this)
   }
 
 
-  deleteReview(reviewId) {
-    return () => {
-      const { product } = this.state;
-      const { reviews } = product;
-
-      this.setState({
-        product: {
-          ...product,
-          reviews: reviews.filter(review => review.id !== reviewId)
+  componentDidMount(){
+    Product.show(this.props.match.params.id)
+    .then(product=>{
+      this.setState((state)=>{
+        return{
+          product: product
         }
-      });
-    };
+      })
+    })
   }
-
+  deleteReview(id){
+    this.setState((state)=>{
+      return {
+        reviews: state.reviews.filter(r=>r.id !==id)
+      }
+    })
+  }
   render(){
-    const { product } = this.state;
-    const { reviews = [] } = product;
+  const { title, description, created_at, seller, price, reviews } = this.state.product;
   return (
     <main>
-             <ProductDetails {...product} />
-             <h3>Reviews</h3>
-
-             <ReviewList reviews={reviews} onReviewDeleteClick={this.deleteReview} />
-
+      <ProductDetails
+        title={title}
+        description={description}
+        fullName={seller?seller.full_name:''}
+        price={price}
+        created_at={new Date(created_at)}
+      />
+      <ReviewList 
+      reviews={reviews}
+      deleteReview={this.deleteReview} />
     </main>
   )
 }}
