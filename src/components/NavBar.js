@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
-function NavBar(props) {
+const NavBar = (props) => {
+    function handleSignOut(){
+        props.destroySession()
+    }
   return (
     <nav
       style={{
@@ -18,6 +20,22 @@ function NavBar(props) {
       <NavLink style={{ marginRight: "20px" }} to="/products/new">
         New Product
       </NavLink>
+      {props.currentUser ? (
+        <React.Fragment>
+          <span style={{ marginRight: "20px" }} >Welcome, {props.currentUser.first_name}</span>
+          <button style={{ marginRight: "20px" }}  onClick={handleSignOut}>Sign Out</button>
+        </React.Fragment>
+      ) : (
+        <>
+          <NavLink style={{ marginRight: "20px" }} to="/sign_in">
+            Sign In
+          </NavLink>
+
+          <NavLink style={{ marginRight: "20px" }} to="/sign_up">
+            Sign Up
+          </NavLink>
+        </>
+      )}
     </nav>
   );
 }
