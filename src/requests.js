@@ -43,11 +43,6 @@ export const Session = {
       return res.json();
     })
   },
-  currentUser() {
-    return fetch(`${BASE_URL}/current_user`, {
-      credentials: "include",
-    }).then((res) => res.json());
-  },
   destroy(){
     return fetch(`${BASE_URL}/session`, {
       method: 'Delete',
@@ -58,7 +53,7 @@ export const Session = {
 
 export const User = {
   current() {
-    return fetch(`${BASE_URL}/users/current_user`, {
+    return fetch(`${BASE_URL}/current_user`, {
       credentials: 'include',
     }).then(res => res.json())
   },
