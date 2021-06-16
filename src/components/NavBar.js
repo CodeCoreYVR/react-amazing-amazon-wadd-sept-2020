@@ -1,14 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Session } from '../requests'
 
-function NavBar({ currentUser, onSignOut }) {
+function NavBar({ currentUser, destroySession }) {
 
   function handleSignOut(){
-    Session.destroy().then(() => {
-      onSignOut()
-    })
-  }
+    destroySession()}
   return (
     <nav
       style={{

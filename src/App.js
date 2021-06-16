@@ -66,7 +66,7 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
-        <NavBar currentUser={this.state.user} onSignOut={this.onSignOut}/>
+        <NavBar currentUser={this.state.user} destroySession={this.destroySession}/>
         <Switch>
         <AuthRoute
               path="/products/new"
