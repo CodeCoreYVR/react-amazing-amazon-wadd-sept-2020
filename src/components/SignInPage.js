@@ -16,6 +16,7 @@ const SignInPage = (props) => {
         setErrors([...errors, { message: "wrong email or password" }]);
       else {
         props.history.push("/products");
+        console.log(props.onSignIn)
         if (typeof props.onSignIn === "function") {
           props.onSignIn();
         }
