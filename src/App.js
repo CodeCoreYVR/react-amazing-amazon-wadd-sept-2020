@@ -9,6 +9,8 @@ import AuthRoute from "./components/AuthRoute";
 import SignUpPage from "./components/SignUpPage";
 import SignInPage from "./components/SignInPage";
 import "./App.css";
+import NotFoundPage from './components/NotFoundPage';
+
 const App = () => {
   const [appState, setAppState] = useState({
     user: null,
@@ -56,6 +58,8 @@ const App = () => {
             )}
           />
           <Route path="/products/:id" component={ProductShowPage} />
+          <Route component={NotFoundPage}/>
+
         </Switch>
       </BrowserRouter>
     </div>
