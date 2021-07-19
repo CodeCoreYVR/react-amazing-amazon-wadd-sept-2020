@@ -19,7 +19,7 @@ const App = () => {
   const getCurrentUser = () => {
     User.current().then((data) => {
       console.log(data)
-      if (typeof data.id !== "number"){
+      if (typeof data?.id !== "number"){
         setAppState({ ...appState, user: null });
       } else {
         setAppState({ ...appState, user: data });
